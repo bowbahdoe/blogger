@@ -23,7 +23,7 @@ def generate_blog_routes() -> None:
     gives all of the markdown files under static/blog_posts a view
     under /blog_posts that represents their rendered HTML
     
-    Returns a blueprint object representing all of these paths
+    registers all of these paths under the app object
     '''
 
     #####################################################################
