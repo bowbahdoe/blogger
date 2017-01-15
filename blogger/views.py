@@ -18,7 +18,7 @@ from blogger import app
 BLOG_ROUTES = []
 BLOG_PATH = os.path.join(app.static_folder, 'blog_posts')
 
-def generate_blog_routes() -> None:
+def generate_blog_routes():
     '''
     gives all of the markdown files under static/blog_posts a view
     under /blog_posts that represents their rendered HTML
@@ -65,6 +65,10 @@ def generate_blog_routes() -> None:
     global BLOG_ROUTES
     BLOG_ROUTES = REL_PATHS[:]
     
+def remove_extension(path):
+    '''
+    removes any extension from the given path
+    '''
 def make_fetching_procedure(path) -> typing.Callable[[], str]:
     '''
     creates a procedure that will get the given markdown file out of static
@@ -76,8 +80,10 @@ def make_fetching_procedure(path) -> typing.Callable[[], str]:
     '''
     def post_fetcher() -> str:
         with open(path, 'r') as markdown_file:
-            return markdown.markdown(markdown_file.read())
-    
+            try:
+                return markdown.markdown(markdown_file.read())
+            except:
+                return '<h2> If you are seeing this, an error occured on the server</h2>'
     return post_fetcher
 
 @app.route('/api/get_blog_routes')
