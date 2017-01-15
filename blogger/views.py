@@ -80,7 +80,7 @@ def make_fetching_procedure(path) -> typing.Callable[[], str]:
     
     return post_fetcher
 
-@app.route('/api/get_blog_routes')        
+@app.route('/api/get_blog_routes')
 def get_blog_routes():
     '''
     returns a list of all the contents of BLOG_ROUTES
