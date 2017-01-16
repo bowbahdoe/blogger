@@ -73,16 +73,15 @@ def initialize_blog():
     post_view.cache_clear()
 
 @app.route('/blog_posts/<path:selection>')
-@functools.lru_cache(maxsize=2**6)
+@functools.lru_cache()
 def post_view(selection):
-    print(BLOG_ROUTES)
+    '''
+    returns dynamically the html of the given blog page
+    '''
     for route in BLOG_ROUTES:
         if route['uri'] == selection:
             return flask.jsonify(route['html'])
     return flask.jsonify(error=404, text='unable to find post'), 404
-
-
-
 
 @app.route('/get_blog_routes')
 def get_blog_routes():
