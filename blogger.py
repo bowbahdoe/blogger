@@ -19,15 +19,11 @@ def create_dir():
     looks for the directory where we store blog posts, and if it
     doesnt exist creates it
     '''
-    try:
-        os.stat(app.static_folder)
-    except:
-        os.mkdir(app.static_folder)
 
     try:
         os.stat(BLOG_PATH)
     except:
-        os.mkdir(BLOG_PATH)
+        os.makedirs(BLOG_PATH)
 
 def populate_blog_routes():
     '''
@@ -64,7 +60,7 @@ def start_watcher():
     '''
     event_handler = ReloadFiles()
     observer = Observer()
-    observer.schedule(_event_handler, BLOG_PATH, recursive=True)
+    observer.schedule(event_handler, BLOG_PATH, recursive=True)
     observer.start()
 
 def initialize_blog():
