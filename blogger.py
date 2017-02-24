@@ -7,7 +7,7 @@ from watchdog.events import FileSystemEventHandler
 from gevent.wsgi import WSGIServer
 
 BLOG_FOLDER = 'posts'
-DEBUG = True
+DEBUG = False
 
 if __name__ == '__main__':
     blogger = flask.Flask(__name__, static_folder=BLOG_FOLDER)
