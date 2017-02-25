@@ -2,6 +2,7 @@ import os
 import flask
 import markdown
 import functools
+import flask_cors
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from gevent.wsgi import WSGIServer
@@ -11,6 +12,7 @@ DEBUG = False
 
 if __name__ == '__main__':
     blogger = flask.Flask(__name__, static_folder=BLOG_FOLDER)
+    flask_cors.CORS().init_app(blogger)
 else:
     blogger = flask.Blueprint('blogger', __name__, static_folder=BLOG_FOLDER)
 
